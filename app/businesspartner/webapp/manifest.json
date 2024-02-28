@@ -1,0 +1,169 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "businesspartner",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.12.2",
+      "toolsId": "c059e105-303b-42d6-95de-a032389c111a"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/electronicsapp/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.8",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "businesspartner.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "BusinessPartnerList",
+          "target": "BusinessPartnerList"
+        },
+        {
+          "pattern": "BusinessPartner({key}):?query:",
+          "name": "BusinessPartnerObjectPage",
+          "target": "BusinessPartnerObjectPage"
+        }
+      ],
+      "targets": {
+        "BusinessPartnerList": {
+          "type": "Component",
+          "id": "BusinessPartnerList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/BusinessPartner",
+              "variantManagement": "Page",
+              "navigation": {
+                "BusinessPartner": {
+                  "detail": {
+                    "route": "BusinessPartnerObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "actions": {
+                    "is_vendor": {
+                      "press": "businesspartner.ext.is_vendor.is_vendor.is_vendor",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "is_vendor"
+                    },
+                    "is_customer": {
+                      "press": "businesspartner.ext.is_customer.is_customer.is_customer",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "is_customer"
+                    },
+                    "is_notcustomer": {
+                      "press": "businesspartner.ext.is_notcustomer.is_notcustomer.is_notcustomer",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "is_notcustomer"
+                    },
+                    "is_notvendor": {
+                      "press": "businesspartner.ext.is_notvendor.is_notvendor.is_notvendor",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "is_notvendor"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "BusinessPartnerObjectPage": {
+          "type": "Component",
+          "id": "BusinessPartnerObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/BusinessPartner"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}
